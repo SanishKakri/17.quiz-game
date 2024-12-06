@@ -10,12 +10,12 @@
     <div class="container">
       <h1>Simple Quiz Game</h1>
       <div class="questions">
-        <h2>question goes here.</h2>
-        <div class="answers">
-          <button class="btn" onclick="checkNext()">answer</button>
-          <button class="btn" onclick="checkNext()">answer1</button>
-          <button class="btn" onclick="checkNext()">answer2</button>
-          <button class="btn" onclick="checkNext()">answer3</button>
+        <h2 id="questionSent">question goes here.</h2>
+        <div class="answers" id="answerDiv">
+          <button class="btn">answer</button>
+          <button class="btn">answer1</button>
+          <button class="btn">answer2</button>
+          <button class="btn">answer3</button>
         </div>
         <div class="nextBtnHolder">
           <button class="nextBtn" id="nxtBtn" onclick="nextQuestion()">
