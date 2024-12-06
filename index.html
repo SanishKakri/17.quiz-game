@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" href="styles.css" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz Game</title>
   </head>
   <body>
@@ -12,12 +12,16 @@
       <div class="questions">
         <h2>question goes here.</h2>
         <div class="answers">
-          <button class="btn">answer</button>
-          <button class="btn">answer1</button>
-          <button class="btn">answer2</button>
-          <button class="btn">answer3</button>
+          <button class="btn" onclick="checkNext()">answer</button>
+          <button class="btn" onclick="checkNext()">answer1</button>
+          <button class="btn" onclick="checkNext()">answer2</button>
+          <button class="btn" onclick="checkNext()">answer3</button>
         </div>
-        <div class="nextBtnHolder"><button class="nextBtn">next</button></div>
+        <div class="nextBtnHolder">
+          <button class="nextBtn" id="nxtBtn" onclick="nextQuestion()">
+            next
+          </button>
+        </div>
       </div>
     </div>
     <script src="main.js"></script>
