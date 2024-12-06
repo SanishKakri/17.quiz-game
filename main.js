@@ -1,6 +1,6 @@
 const answerButtons = document.getElementById("answerDiv");
-const nextButton = document.querySelector("nextBtn");
-const questionElement = document.querySelector("questions");
+const nextButton = document.getElementById("nxtBtn");
+const questionElement = document.querySelector(".questions");
 const questionSentence = document.getElementById("questionSent");
 
 let score = 0;
@@ -33,23 +33,29 @@ function beginning() {
 }
 
 function startQuiz(result) {
-  resetState();
   const question = result.question;
   const answers = result.answers;
   const correct = result.correct;
   const category = result.category;
-
+  resetState();
   questionSentence.innerHTML = question;
 
   for (i = 0; i < 4; i++) {
     const button = document.createElement("button");
     button.innerHTML = answers[`${i}`];
     button.classList.add("btn");
+    button.id = "btnBtn";
     answerButtons.appendChild(button);
     button.addEventListener("click", () => {
       if (button.innerHTML === correct) {
         button.classList.replace("btn", "btnCorrect");
-        console.log("this is the correct ans.");
+
+        nextButton.style.display = "block";
+        console.log("this is correct");
+      } else {
+        button.classList.replace("btn", "btnInorrect");
+        nextButton.style.display = "block";
+        console.log("this is incorrect");
       }
     });
   }
