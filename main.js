@@ -21,6 +21,7 @@ try {
 	console.error(error);
 }
 }
+
 waitApi();
 
 function startQuiz(result) {
