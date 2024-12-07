@@ -3,6 +3,7 @@ const nextButton = document.getElementById("nxtBtn");
 const questionElement = document.querySelector(".questions");
 const questionSentence = document.getElementById("questionSent");
 
+let nextBtnClicked = 0;
 let score = 0;
 
 async function waitApi() {
@@ -10,7 +11,7 @@ async function waitApi() {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": "7b65183b59msh0e7b388c8290975p1c38f3jsnffbb64a96461",
+      "x-rapidapi-key": "14226b01e0msh0429f7c7e118cdfp1f5463jsn9d4ab4540b50",
       "x-rapidapi-host": "quizmania-api.p.rapidapi.com",
     },
   };
@@ -25,18 +26,10 @@ async function waitApi() {
   }
 }
 
-waitApi();
-
-function beginning() {
-  score = 0;
-  startQuiz;
-}
-
 function startQuiz(result) {
   const question = result.question;
   const answers = result.answers;
   const correct = result.correct;
-  const category = result.category;
   resetState();
   questionSentence.innerHTML = question;
 
@@ -49,15 +42,31 @@ function startQuiz(result) {
     button.addEventListener("click", () => {
       if (button.innerHTML === correct) {
         button.classList.replace("btn", "btnCorrect");
-
         nextButton.style.display = "block";
-        console.log("this is correct");
+        disableAllButtons();
+        score++;
       } else {
         button.classList.replace("btn", "btnInorrect");
         nextButton.style.display = "block";
-        console.log("this is incorrect");
+        disableAllButtons();
       }
     });
+  }
+}
+
+function disableAllButtons() {
+  const buttons = document.querySelectorAll(".btn");
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+  });
+}
+
+function nextQuestion() {
+  nextBtnClicked++;
+  waitApi();
+  if (nextBtnClicked === 10) {
+    console.log(`your score is ${score}`);
+    restartPage();
   }
 }
 
@@ -66,4 +75,23 @@ function resetState() {
   while (answerButtons.firstChild) {
     answerButtons.removeChild(answerButtons.firstChild);
   }
+}
+
+function restartPage() {
+  const container = document.querySelector(".container");
+  container.classList.replace("container", "gameEnds");
+  nextButton.style.display = "none";
+  container.innerHTML = `<h2 class= "strtText">your Score is ${score}</h2>
+  <br> 
+  <button class = "strtBtn" onclick="restrtBtn()">Restart</button>
+  `;
+}
+
+function restrtBtn() {
+  const container = document.querySelector(".gameEnds");
+  container.classList.replace("gameEnds", "container");
+  location.reload();
+}
+function runBtn() {
+  waitApi();
 }
